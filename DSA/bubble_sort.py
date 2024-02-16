@@ -12,6 +12,11 @@ def Bubble_sort(arr):
     return arr
 
 
-arr = [11, 10, 1]
+n = int(input("Enter the size of the Array"))
+arr = []
+for i in range(n):
+    el = int(input(f"Enter the {i + 1} element of the array "))
+    arr.append(el)
+print(arr)
 Bubble_sort(arr)
 print(arr)
