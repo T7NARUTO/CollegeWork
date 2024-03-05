@@ -17,6 +17,16 @@ class LinkedList:
             cur = cur.next
         return result[:-2]
 
+    def display(self):
+        if not self.head:
+            print("Linked list is empty")
+            return
+        cur = self.head
+        while cur:
+            print(cur.data, end=" -> ")
+            cur = cur.next
+        print("None")
+
     def __len__(self):
         return self.size
 
@@ -47,7 +57,7 @@ class LinkedList:
 
     def insert_after(self, after_val, new_val):
         if not self.head:
-            return "Linked list is empty"
+            raise ValueError("Linked list is empty")
         cur = self.head
         while cur:
             if cur.data == after_val:
@@ -57,11 +67,11 @@ class LinkedList:
                 self.size += 1
                 return
             cur = cur.next
-        return f"{after_val} not found in the linked list"
+        raise ValueError(f"{after_val} not found in the linked list")
 
     def pop(self):
         if not self.head:
-            return "Linked list is empty"
+            raise ValueError("Linked list is empty")
         if not self.head.next:
             self.head = None
         else:
@@ -73,7 +83,7 @@ class LinkedList:
 
     def remove(self, value):
         if not self.head:
-            return "Linked list is empty"
+            raise ValueError("Linked list is empty")
         if self.head.data == value:
             self.head = self.head.next
             self.size -= 1
@@ -85,17 +95,17 @@ class LinkedList:
                 self.size -= 1
                 return
             cur = cur.next
-        return f"{value} not found in the linked list"
+        raise ValueError(f"{value} not found in the linked list")
 
     def del_head(self):
         if not self.head:
-            return "Linked list is empty"
+            raise ValueError("Linked list is empty")
         self.head = self.head.next
         self.size -= 1
 
     def del_tail(self):
         if not self.head:
-            return "Linked list is empty"
+            raise ValueError("Linked list is empty")
         if not self.head.next:
             self.head = None
         else:
@@ -107,7 +117,7 @@ class LinkedList:
 
     def del_val(self, value):
         if not self.head:
-            return "Linked list is empty"
+            raise ValueError("Linked list is empty")
         if self.head.data == value:
             self.head = self.head.next
             self.size -= 1
@@ -119,7 +129,7 @@ class LinkedList:
                 self.size -= 1
                 return
             cur = cur.next
-        return f"{value} not found in the linked list"
+        raise ValueError(f"{value} not found in the linked list")
 
     def index(self, value):
         pos = 0
@@ -138,7 +148,7 @@ class LinkedList:
                 cur.data = new_val
                 return
             cur = cur.next
-        return f"{prev_val} not found in the linked list"
+        raise ValueError(f"{prev_val} not found in the linked list")
 
 
 def main():
@@ -151,7 +161,8 @@ def main():
         3. Perform delete operations.
         4. Search for an element.
         5. Perform update operations.
-        6. Exit
+        6. Display the linked list.
+        7. Exit
         ''')
         choice = int(input("Enter your choice: "))
 
@@ -210,24 +221,43 @@ def main():
                 try:
                     pos = ll.index(val)
                     print(f"Element found at position {pos}")
-                except ValueError:
-                    print("Element not found in linked list")
+                except ValueError as e:
+                    print(e)
             elif option == 2:
                 ind = int(input("Enter the index number: "))
                 try:
                     value = ll[ind]
                     print(f"Value at index {ind} is {value}")
-                except IndexError:
-                    print("Index out of range")
+                except IndexError as e:
+                    print(e)
             else:
                 print("Invalid option")
         elif choice == 5:
             print('''
-            1. Replace a value.
+             1. Replace a value.
             ''')
             option = int(input("Enter your choice: "))
             if option == 1:
                 prev_val = int(input("Enter the value to be replaced: "))
                 new_val = int(input("Enter the new value: "))
-                ll.replace(prev_val, new_val)
-                print
+                try:
+                    ll.replace(prev_val, new_val)
+                    print("Replacement successful")
+                except ValueError as e:
+                    print(e)
+            else:
+                print("Invalid option")
+        elif choice == 6:
+            if ll:
+                ll.display()
+            else:
+                print("Linked list is not created yet")
+        elif choice == 7:
+            print("Exiting...")
+            break
+        else:
+            print("Invalid choice")
+
+
+if __name__ == "__main__":
+    main()
