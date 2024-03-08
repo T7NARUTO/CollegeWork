@@ -1,27 +1,29 @@
+import java.util.Scanner;
 public class linear_search {
-    public static void main(String[] args){
-        int[] arr = new int[5];
-        arr[0] = 10;
-        arr[1] = 20;
-        arr[2] = 30;
-        arr[3] = 40;
-        arr[4] = 50;
-        int len = arr.length;
+    static void Linear_search(int[]array,int value){
+        int len = array.length;
         int i = 0;
-        int value = 1;
-        int flag = 0;
         while(i < len){
-            if (arr[i] == value) {
-                flag = 1;
-                break;
+            if (array[i] == value) {
+                System.out.println("found" + value + "at" + i);
+                return;
             }
             i += 1;
         }
-        if (flag == 1){
-            System.out.println("value present in array");
+        System.out.println("value not found ");
+    }
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the limit of the array");
+        int n = sc.nextInt();
+        int[] array = new int[n];
+        for(int i = 0; i < n; i++){
+            System.out.println("Enter the "+i+" Element of the array");
+            int el = sc.nextInt();
+            array[i] = el;
         }
-        else{
-            System.out.println("value not present in array");
-        }
+        System.out.println("Enter the value to search");
+        int value = sc.nextInt();
+        Linear_search(array,value);
     }
 }
