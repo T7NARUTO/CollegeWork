@@ -1,3 +1,8 @@
+import datetime as time
+import matplotlib.pyplot as plt
+import random
+
+
 def binary_search(arr, target):
     left, right = 0, len(arr) - 1
     while left <= right:
@@ -11,32 +16,23 @@ def binary_search(arr, target):
     return -1
 
 
-while True:
-    print("1. Initialise the Sorted Array.")
-    print("2. Search for an element using Binary Search.")
-    print("3. Exit.")
-    option = int(input("Select an option to continue: "))
+def measure_time_complexity_binary_search(arr_size):
+    ary = sorted([random.randint(0, arr_size) for i in range(arr_size)])
+    target = random.randint(0, arr_size)
+    start_time = time.datetime.now()
+    binary_search(ary, target)
+    end_time = time.datetime.now()
+    return (end_time - start_time).total_seconds()
 
-    if option == 1:
-        arr = []
-        n = int(input("Enter the size of the sorted array: "))
-        print("Enter the sorted elements of the array:")
-        for i in range(n):
-            element = int(input(f"Enter the {i+1}th element: "))
-            arr.append(element)
-        arr.sort()  # Sorting the array to ensure it's in ascending order
 
-    elif option == 2:
-        if 'arr' in locals():
-            target = int(input("Enter the element to search: "))
-            index = binary_search(arr, target)
-            if index != -1:
-                print(f"Element {target} found at index {index}.")
-            else:
-                print(f"Element {target} not found in the array.")
-        else:
-            print("Please initialize the array first.")
-    elif option == 3:
-        break
-    else:
-        print("Invalid option. Please select again.")
+x = [5000, 10000, 15000]
+y_binary_search = []
+
+for size in x:
+    y_binary_search.append(measure_time_complexity_binary_search(size))
+
+plt.bar([str(size) for size in x], y_binary_search)
+plt.xlabel('Input Size')
+plt.ylabel('Time (seconds)')
+plt.title('Binary Search Time Complexity')
+plt.show()

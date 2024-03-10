@@ -1,7 +1,7 @@
 import java.util.Arrays;
 import java.util.Scanner;
 public class bubble_sort{
-    static int[] BubbleSort(int[] array){
+    static void BubbleSort(int[] array){
         int len = array.length;
         while(len > 0){
             int i = 0;
@@ -15,7 +15,6 @@ public class bubble_sort{
             }
             len -= 1;
         }
-        return array;
     }
 
     public static void main (String[] args){

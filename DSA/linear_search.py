@@ -1,28 +1,32 @@
-def linear_search(array, value):
-    len_arr = len(array)
-    i = 0
-    while i < len_arr:
-        if array[i] == value:
-            pos = i
-            return print(f'element found at position {pos}. ')
-        i += 1
-    return print('element not found')
+import datetime as time
+import matplotlib.pyplot as plt
+import random
 
 
-while True:
-    print("1.Initialise the Array. "
-          "2.Search for elements using Linear search. "
-          "3.Exit. ")
-    options = int(input('Select a Option to continue. '))
-    if options == 1:
-        arr = []
-        n = int(input("Enter the size of the array. "))
-        for i in range(n):
-            element = int(input(f"Enter the {i} element of the array. "))
-            arr.append(element)
-        continue
-    elif options == 2:
-        sc = int(input("Enter the Element to search in the array. "))
-        linear_search(arr, sc)
-    elif options == 3:
-        break
+def linear_search(arr, target):
+    for i in range(len(arr)):
+        if arr[i] == target:
+            return i
+    return -1
+
+
+def measure_time_complexity_linear_search(arr_size):
+    ary = [random.randint(0, arr_size) for i in range(arr_size)]
+    target = random.randint(0, arr_size)
+    start_time = time.datetime.now()
+    linear_search(ary, target)
+    end_time = time.datetime.now()
+    return (end_time - start_time).total_seconds()
+
+
+x = [500, 1000, 1500]  # Input sizes
+y_linear_search = []
+
+for size in x:
+    y_linear_search.append(measure_time_complexity_linear_search(size))
+
+plt.bar([str(size) for size in x], y_linear_search)
+plt.xlabel('Input Size')
+plt.ylabel('Time (seconds)')
+plt.title('Linear Search Time Complexity')
+plt.show()

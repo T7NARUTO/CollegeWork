@@ -1,33 +1,34 @@
-def selection_sort(array):
-    n = len(array)
-    for i in range(n):
-        min_idx = i
+import datetime as time
+import matplotlib.pyplot as plt
+import random
+
+
+def selection_sort(arr):
+    n = len(arr)
+    for i in range(n - 1):
+        min_index = i
         for j in range(i + 1, n):
-            if array[j] < array[min_idx]:
-                min_idx = j
-        array[i], array[min_idx] = array[min_idx], array[i]
-    return array
+            if arr[j] < arr[min_index]:
+                min_index = j
+        arr[i], arr[min_index] = arr[min_index], arr[i]
 
 
-while True:
-    print("1. Initialise the Array.")
-    print("2. Sort the array using Selection Sort.")
-    print("3. Exit.")
-    option = int(input("Select an option to continue: "))
+def measure_time_complexity_selection_sort(arr_size):
+    ary = [random.randint(0, arr_size) for i in range(arr_size)]
+    start_time = time.datetime.now()
+    selection_sort(ary)
+    end_time = time.datetime.now()
+    return (end_time - start_time).total_seconds()
 
-    if option == 1:
-        arr = []
-        n = int(input("Enter the size of the array: "))
-        for i in range(n):
-            element = int(input(f"Enter the {i+1}th element of the array: "))
-            arr.append(element)
-    elif option == 2:
-        if 'arr' in locals():
-            sorted_arr = selection_sort(arr)
-            print("Sorted array using Selection Sort:", sorted_arr)
-        else:
-            print("Please initialize the array first.")
-    elif option == 3:
-        break
-    else:
-        print("Invalid option. Please select again.")
+
+x = [500, 1000, 1500]  # Input sizes
+y_selection_sort = []
+
+for size in x:
+    y_selection_sort.append(measure_time_complexity_selection_sort(size))
+
+plt.bar([str(size) for size in x], y_selection_sort)
+plt.xlabel('Input Size')
+plt.ylabel('Time (seconds)')
+plt.title('Selection Sort Time Complexity')
+plt.show()
