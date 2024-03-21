@@ -10,6 +10,15 @@ class Queue:
         self.front = None
         self.rear = None
 
+    def __str__(self):
+        cur = self.front
+        result = ""
+        while cur:
+            result = result + str(cur.value) + "<->"
+            cur = cur.next
+        return result[:-3]
+    
+
     def enQueue(self, value):
         new_node = Node(value)
         if self.front is None:
@@ -28,10 +37,13 @@ class Queue:
         if self.front is None:
             raise IndexError("queue is empty")
         self.front = self.front.next
+    
+    def getFront(self):
+        return str(self.front.value)
 
 
 q = Queue()
 q.enQueue(10)
 q.enQueue(11)
 q.enQueue(1)
-print(q.rear.prev.value)
+print(q)
