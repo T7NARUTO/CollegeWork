@@ -17,5 +17,6 @@ public class Array1{
         float average = (float) sum /limit;
         System.out.println("Sum:-"+ sum);
         System.out.println("Average:-" + average);
+        sc.close();
     }
 }

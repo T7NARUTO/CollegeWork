@@ -22,5 +22,6 @@ public class Array3 {
             array[i] = element;
         }
         EvenOdd(array);
+        sc.close();
     }
 }

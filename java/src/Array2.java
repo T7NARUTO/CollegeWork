@@ -32,5 +32,6 @@ public class Array2{
             array[i] = el;
         };
         IsPrime(array);
+        sc.close();
     }
 }
