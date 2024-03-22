@@ -1,5 +1,4 @@
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 
 public class fileHandling {
     public static void main(String[] args){
@@ -17,8 +16,24 @@ public class fileHandling {
             e.printStackTrace();;
         }
         */
-
+        /* File writing
         try{
+            FileWriter fw = new FileWriter("file.txt");
+            String line = "new line";
+            fw.write(line);
+            System.out.println("successfully created");
+            fw.close();
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+        */
+        try {
+            BufferedReader fr = new BufferedReader(new FileReader("file.txt"));
+            String line = fr.readLine();
+            System.out.println(line);
+            fr.close();
+        }catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
