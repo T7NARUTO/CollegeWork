@@ -82,7 +82,18 @@ class DLL:
                 self.n += 1
                 return
             cur = cur.next
-
+        
+    def del_Head(self):
+        if self.head is None:
+            raise InterruptedError("Empty Linked List")
+        self.head = self.head.next
+        self.head.prev = None
+        self.n -= 1
+    
+    def del_Tail(self):
+        self.tail = self.tail.prev
+        self.tail.next = None
+        self.n -= 1
 
 dll = DLL()
 dll.insertHead(10)
@@ -92,4 +103,4 @@ dll.insertAfter(30, 15)
 dll.insertBefore(30, 1)
 print(dll)
 print(len(dll))
-print(dll[5])
+print(dll[4])
